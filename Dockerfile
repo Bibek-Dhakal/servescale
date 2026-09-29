@@ -2,12 +2,14 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install dependencies using pyproject.toml
-COPY pyproject.toml .
+# Copy necessary files for building the package via pyproject.toml
+COPY pyproject.toml README.md ./
+COPY ./app /app/app
+
+# Install application and dependencies
 RUN pip install --no-cache-dir .
 
-# Copy application code and models
-COPY ./app /app/app
+# Copy models separately (as they can be large/frequently updated independently)
 COPY ./models /app/models
 
 # Use a non-root user for security
