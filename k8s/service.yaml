@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: servescale-service
+spec:
+  # Use NodePort or LoadBalancer depending on minikube vs cloud
+  type: NodePort
+  selector:
+    app: servescale
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+      nodePort: 30000

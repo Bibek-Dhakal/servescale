@@ -1,0 +1,25 @@
+.git/
+.gitignore
+.dockerignore
+.env*
+PATCH.md
+
+# Virtual envs & caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Dev/IDE
+.idea/
+.vscode/
+.DS_Store
+
+# Don't bake testing tools or generation scripts into the prod image
+tests/
+scripts/
+load_tests/

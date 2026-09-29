@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servescale-deployment
+  labels:
+    app: servescale
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: servescale
+  # Ensures Zero-Downtime Rollout
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: servescale
+    spec:
+      containers:
+      - name: api
+        image: servescale:v1
+        imagePullPolicy: Never # Adjust for cloud/remote clusters (e.g. Always)
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PORT
+          value: "8000"
+        - name: MODEL_PATH
+          value: "models/model_quantized.onnx"
+
+        # Proves readiness before routing traffic
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          failureThreshold: 3
+
+        # Detects if app is stuck/deadlocked
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 15
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
