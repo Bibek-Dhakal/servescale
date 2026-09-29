@@ -14,6 +14,8 @@ Tests simulate incoming JSON parsing correctly mapping to inference requests.
 
 To explicitly measure inference latency and prove no-dropped-connections during a K8s rolling update, use `Locust`.
 
+> 📸 **Visual Evidence:** View the [v0.2.0 Run Report](../runs/v0.2.0_run.md#6-load-testing-locust) for K8s observability screenshots demonstrating **0% fail rates** during a rolling update.
+
 **Execution:**
 
 1. Ensure the API is active (via Uvicorn or k8s port-forwarding).

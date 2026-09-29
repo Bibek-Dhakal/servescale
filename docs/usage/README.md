@@ -13,6 +13,8 @@ Configuration is securely passed through `.env` locally or as ConfigMaps/Secrets
 
 ## Run Kubernetes Deployments Locally
 
+> 📸 **See it in action:** Visual terminal evidence for all deployment steps can be found in the [v0.2.0 Run Report](../runs/v0.2.0_run.md#5-kubernetes-setup--deployment).
+
 **Prerequisites:** [Minikube](https://minikube.sigs.k8s.io/), [Kind](https://kind.sigs.k8s.io/), or Docker Desktop
 running locally.
 
@@ -132,6 +134,8 @@ kubectl port-forward svc/servescale-service 8000:80
 ## Rolling Update / Zero-Downtime Deployment
 
 To deploy a new model or app version without dropping traffic:
+
+> 📸 **Visual Proof:** See our [Zero-Downtime Rollout K8s execution logs](../runs/v0.2.0_run.md#7-zero-downtime-rollout-execution) ensuring zero HTTP request drops.
 
 1. **Build the new version:**
 

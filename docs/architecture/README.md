@@ -9,6 +9,8 @@ Rather than serving dense 32-bit floating point models directly via PyTorch, the
 
 ## System Topology
 
+> 📸 **Visual Diagram:** View the graphical version of this topology in our [v0.2.0 Run Report](../runs/v0.2.0_run.md#1-architecture-overview).
+
 ```mermaid
 graph TD;
     Client[Locust / Client] -->|HTTP POST| LB[K8s Service / Load Balancer]
